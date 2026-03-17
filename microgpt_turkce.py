@@ -93,7 +93,7 @@ beta2         = 0.99
 eps_adam      = 1e-8
 
 num_steps   = 1000
-temperature = 0.5
+temperature = 0.1
 
 # ---------------------------------------------------------------------------
 # Model parameters (weights)
@@ -202,6 +202,25 @@ for step in range(num_steps):
     print(f"step {step+1:4d} / {num_steps:4d} | loss {loss.data:.4f}", end='\r')
 
 print()
+
+# ---------------------------------------------------------------------------
+# Save model weights to JSON (for use in microgpt_inference.py)
+# ---------------------------------------------------------------------------
+
+import json
+checkpoint = {
+    'uchars':     uchars,
+    'n_layer':    n_layer,
+    'n_embd':     n_embd,
+    'block_size': block_size,
+    'n_head':     n_head,
+    'vocab_size': vocab_size,
+    'state_dict': {k: [[p.data for p in row] for row in mat]
+                   for k, mat in state_dict.items()},
+}
+with open('model_turkce.json', 'w', encoding='utf-8') as f:
+    json.dump(checkpoint, f)
+print("Model kaydedildi → model_turkce.json")
 
 # ---------------------------------------------------------------------------
 # Inference
