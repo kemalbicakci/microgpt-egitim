@@ -11,6 +11,7 @@ Bu repo, Karpathy'nin `microgpt.py` dosyasını temel alarak sıfırdan bir GPT'
 
 | Dosya | Açıklama |
 |---|---|
+| `microgpt_turkce.py` | **Türkçe isimler üzerinde eğitilen temiz versiyon** — orijinal algoritma, sıfır eklenti |
 | `microgpt_animated.py` | Animasyonlu öğretim versiyonu — eğitim sırasında GIF'ler üretir |
 | `create_presentation_tr.py` | Türkçe PowerPoint sunumunu oluşturur |
 | `create_presentation.py` | İngilizce PowerPoint sunumunu oluşturur |
@@ -18,7 +19,8 @@ Bu repo, Karpathy'nin `microgpt.py` dosyasını temel alarak sıfırdan bir GPT'
 | `insert_arch_slide.py` | Mimari slaytını PPTX'e ekler |
 | `microgpt_aciklamali.pptx` | Türkçe sunum (21 slayt) |
 | `microgpt_explained.pptx` | İngilizce sunum (20 slayt) |
-| `input.txt` | ~32.000 İngilizce isim (eğitim verisi) |
+| `isimler.txt` | **1115 Türkçe isim — Türkçe model için eğitim verisi** |
+| `input.txt` | ~32.000 İngilizce isim (İngilizce model için eğitim verisi) |
 
 ---
 
@@ -45,7 +47,17 @@ Bu repo, Karpathy'nin `microgpt.py` dosyasını temel alarak sıfırdan bir GPT'
 pip install matplotlib python-pptx
 ```
 
-### 2. Modeli eğit ve animasyonları üret
+### 2a. Türkçe model — Türkçe isimler öğren
+
+```bash
+python microgpt_turkce.py
+```
+
+`isimler.txt` repo ile birlikte gelir, ekstra indirme gerekmez.
+vocab_size = **30** (29 Türkçe harf + BOS).
+Eğitim biter, model kendi hayal ettiği Türkçe isimleri üretir.
+
+### 2b. Animasyonlu öğretim versiyonu (İngilizce veri)
 
 ```bash
 python microgpt_animated.py
@@ -69,10 +81,29 @@ python create_presentation.py
 
 ## Modelin Öğrendikleri
 
+### Türkçe versiyon (`microgpt_turkce.py`)
+
+```
+num docs: 1115
+vocab size: 30        ← 29 Türkçe harf + BOS
+num params: 7,492
+
+step 1000 / 1000 | loss ~2.1
+
+örnek  1: emre
+örnek  2: ayşe
+örnek  3: burak
+...
+```
+
+Türkçe alfabeye özel karakterler (ç, ğ, ı, ö, ş, ü) üretimde doğal biçimde yer alır.
+
+### İngilizce animasyonlu versiyon (`microgpt_animated.py`)
+
 ```
 num docs: 32033
 vocab size: 27
-num params: 7.237
+num params: 7,237
 
 step 1000 / 1000 | loss 1.8742
 
@@ -125,7 +156,16 @@ sample  3: lior
 
 ---
 
+## Veri Setleri
+
+| Dosya | Dil | İsim Sayısı | Karakter | vocab_size |
+|---|---|---|---|---|
+| `isimler.txt` | Türkçe | 1.115 | a-z + ç ğ ı ö ş ü | **30** |
+| `input.txt` | İngilizce | 32.033 | a-z | **27** |
+
+---
+
 ## Kaynak
 
 - Orijinal kod: [karpathy/microgpt.py](https://gist.github.com/karpathy/b9ada699ceeeb10ee0f6cd2c43cc0494)
-- İsim veri seti: [karpathy/makemore](https://github.com/karpathy/makemore)
+- İngilizce isim veri seti: [karpathy/makemore](https://github.com/karpathy/makemore)
