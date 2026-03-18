@@ -12,14 +12,17 @@ Bu repo, Karpathy'nin `microgpt.py` dosyasını temel alarak sıfırdan bir GPT'
 | Dosya | Açıklama |
 |---|---|
 | `microgpt_turkce.py` | **Türkçe isimler üzerinde eğitilen temiz versiyon** — orijinal algoritma, sıfır eklenti |
+| `microgpt_inference.py` | Kaydedilmiş modelden bağımsız çıkarım — `model_turkce.json` okur, isim üretir |
+| `microgpt_siir.py` | Türkçe şiir dizeleri üzerinde eğitim |
 | `microgpt_animated.py` | Animasyonlu öğretim versiyonu — eğitim sırasında GIF'ler üretir |
 | `create_presentation_tr.py` | Türkçe PowerPoint sunumunu oluşturur |
 | `create_presentation.py` | İngilizce PowerPoint sunumunu oluşturur |
 | `draw_architecture.py` | Mimari diyagramını çizer (`architecture_tr.png`) |
 | `insert_arch_slide.py` | Mimari slaytını PPTX'e ekler |
-| `microgpt_aciklamali.pptx` | Türkçe sunum (21 slayt) |
-| `microgpt_explained.pptx` | İngilizce sunum (20 slayt) |
-| `isimler.txt` | **1115 Türkçe isim — Türkçe model için eğitim verisi** |
+| `insert_pipeline_slide.py` | Pipeline slaytını PPTX'e ekler |
+| `microgpt_aciklamali.pptx` | Türkçe sunum — ağırlık dağılımı ve heatmap açıklamaları dahil |
+| `microgpt_explained.pptx` | İngilizce sunum |
+| `isimler.txt` | **~2.445 Türkçe isim — Türkçe model için eğitim verisi** |
 | `input.txt` | ~32.000 İngilizce isim (İngilizce model için eğitim verisi) |
 
 ---
@@ -84,9 +87,9 @@ python create_presentation.py
 ### Türkçe versiyon (`microgpt_turkce.py`)
 
 ```
-num docs: 1115
+num docs: ~2445
 vocab size: 30        ← 29 Türkçe harf + BOS
-num params: 7,492
+num params: 4,192
 
 step 1000 / 1000 | loss ~2.1
 
@@ -160,7 +163,7 @@ sample  3: lior
 
 | Dosya | Dil | İsim Sayısı | Karakter | vocab_size |
 |---|---|---|---|---|
-| `isimler.txt` | Türkçe | 1.115 | a-z + ç ğ ı ö ş ü | **30** |
+| `isimler.txt` | Türkçe | ~2.445 | a-z + ç ğ ı ö ş ü | **30** |
 | `input.txt` | İngilizce | 32.033 | a-z | **27** |
 
 ---
