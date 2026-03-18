@@ -1,7 +1,9 @@
 """
 Türkçe isimler üzerinde eğitilen saf Python GPT.
-Orijinal microgpt.py algoritması — hiçbir değişiklik yok.
-Tek fark: input.txt yerine isimler.txt kullanılıyor.
+
+Orijinal microgpt.py projesinden farklar: 
+- Türkçe isimler (isimler.txt dosyası) kullanılıyor.
+- Eğitilen model kaydediliyor.
 
 @karpathy
 """
@@ -93,7 +95,7 @@ beta2         = 0.99
 eps_adam      = 1e-8
 
 num_steps   = 1000
-temperature = 0.1
+temperature = 0.9
 
 # ---------------------------------------------------------------------------
 # Model parameters (weights)
